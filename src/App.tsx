@@ -35,10 +35,16 @@ class App extends React.Component<any, State> {
         setInterval(() => {
             if (i < BAR_AMOUNT) {
                 if (j >= 0) {
-                    const sortedArray = sortArray(currentArray, j + 1, j);
-                    this.setState({data: sortedArray});
-                    currentArray = this.state.data;
-                    j--;
+                    if (currentArray[j].y > currentArray[j+1].y) {
+                        const sortedArray = sortArray(currentArray, j + 1, j);
+                        this.setState({data: sortedArray});
+                        currentArray = this.state.data;
+                        j--;
+                    }
+                    else {
+                        j = i;
+                        i++;
+                    }
                 } else {
                     j = i;
                     i++;
